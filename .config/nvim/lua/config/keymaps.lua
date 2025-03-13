@@ -2,9 +2,6 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
--- Keymaps are automatically loaded on the VeryLazy event
--- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
--- Add any additional keymaps here
 function _G.set_terminal_keymaps()
   local opts = { buffer = 0 }
   vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
