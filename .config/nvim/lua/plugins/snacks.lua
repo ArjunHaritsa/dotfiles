@@ -39,15 +39,15 @@ return {
                 "Filename: " .. results[4],
                 "Filename without extension: " .. results[5],
                 "Extension of the filename: " .. results[6],
-              }, { prompt = "Choose to copy to clipboard:" }, function(choice)
+              }, { prompt = "Choose to copy to clipboard:" }, function(item, choice)
                 if choice then
-                  local i = tonumber(choice:sub(1, 1))
+                  local i = tonumber(choice)
                   if i then
                     local result = results[i]
                     vim.fn.setreg('"', result)
                     vim.notify("Copied: " .. result)
                   else
-                    vim.notify("Invalid selection")
+                    vim.notify("Invalid selection :", item)
                   end
                 else
                   vim.notify("Selection cancelled")
