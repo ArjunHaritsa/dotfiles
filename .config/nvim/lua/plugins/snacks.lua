@@ -39,13 +39,19 @@ return {
                 "Filename: " .. results[4],
                 "Filename without extension: " .. results[5],
                 "Extension of the filename: " .. results[6],
+                "Change Directory to : " .. results[1],
               }, { prompt = "Choose to copy to clipboard:" }, function(item, choice)
                 if choice then
                   local i = tonumber(choice)
                   if i then
-                    local result = results[i]
-                    vim.fn.setreg('"', result)
-                    vim.notify("Copied: " .. result)
+                    if i < 7 then
+                      local result = results[i]
+                      vim.fn.setreg('"', result)
+                      vim.notify("Copied: " .. result)
+                    else
+                      vim.cmd({ cmd = "cd", args = { results[1] } })
+                      vim.notify("Current Directory: " .. results[1])
+                    end
                   else
                     vim.notify("Invalid selection :", item)
                   end
