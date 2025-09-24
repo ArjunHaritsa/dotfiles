@@ -1,6 +1,7 @@
 return {
   {
     "craftzdog/solarized-osaka.nvim",
+    name = "solarized-osaka",
     lazy = false,
     priority = 1000,
     config = function()
@@ -9,7 +10,18 @@ return {
           floats = "transparent",
         },
         day_brightness = 0.7,
-        lualine_bold = true,
+        lualine_bold = false,
+        styles = {
+          -- Style to be applied to different syntax groups
+          -- Value is any valid attr-list value for `:help nvim_set_hl`
+          comments = { italic = false },
+          keywords = { italic = true },
+          functions = {},
+          variables = {},
+          -- Background styles. Can be "dark", "transparent" or "normal"
+          sidebars = "dark", -- style for sidebars, see below
+          floats = "dark", -- style for floating windows
+        },
       })
     end,
   },

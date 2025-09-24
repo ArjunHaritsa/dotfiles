@@ -9,10 +9,7 @@ LazyVim.terminal.setup("zsh")
 vim.opt.textwidth = 120
 
 -- Enable full range colours
-vim.opt.termguicolors = true
-
--- Disable snacks animations
-vim.g.snacks_animate = false
+-- vim.opt.termguicolors = true
 
 -- Markdown Preview Settings
 -- NOTE: Make sure ufw allows 9001/tcp

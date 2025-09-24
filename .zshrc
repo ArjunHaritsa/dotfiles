@@ -24,7 +24,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k" # added by ark8kor
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+CASE_SENSITIVE="true"
 
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
@@ -77,14 +77,20 @@ ZSH_THEME="powerlevel10k/powerlevel10k" # added by ark8kor
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+
+# Unbind keys to certain functions
+zle -N menu-search
+zle -N recent-paths
+
+# plugins
 plugins=(
   git
   poetry
   poetry-env
   zsh-autosuggestions
-#  zsh-syntax-highlighting 
-#  fast-syntax-highlighting 
-#  zsh-autocomplete
+  zsh-syntax-highlighting 
+  fast-syntax-highlighting 
+  zsh-autocomplete
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -94,14 +100,14 @@ source $ZSH/oh-my-zsh.sh
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='nvim'
+else
+  export EDITOR='nvim'
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -124,3 +130,38 @@ export TERM=xterm-256color
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+### MODIFIED BY ARK8KOR BEGIN ###
+ 
+# Kerberos token check in right aligned ZSH prompt
+__krb_status() {
+  if ! klist -s ; then
+    print -n "(No Kerberos token -> run kinit)"
+  fi
+}
+prompt_krb() {
+  RPROMPT="%{%k%b%F{red}%}$(__krb_status)%f"
+}
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd prompt_krb
+
+# export pyenvironment variables
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
+
+# Load pyenv-virtualenv automatically by adding
+# the following to ~/.zshrc:
+
+eval "$(pyenv virtualenv-init -)"
+
+# export environment variables
+export PATH="$PATH:/home/ark8kor/.local/bin"
+export PATH="$PATH:/home/ark8kor/Softwares/Editors/nvim-linux-x86_64/bin"
+export PATH="$PATH:/home/ark8kor/Softwares/hugo-v0.150"
+export PATH="$PATH:/opt/Compilers/arc-gcc/arc_gnu_2022.09_prebuilt_elf32_le_linux_install/bin"
+export PATH="$PATH:/opt/Compilers/arm-gcc/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/bin"
+export PATH="$PATH:/home/ark8kor/Workspace/Projects/BST-BSTS-Core/bst_ai_integration/src/bst_ai_integration/tools/COINES/0.5.1/PC/bin/x86/"
+
+### MODIFIED BY ARK8KOR END ###
+
