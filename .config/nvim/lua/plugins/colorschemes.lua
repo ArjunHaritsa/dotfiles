@@ -32,7 +32,15 @@ return {
   },
   { "rose-pine/neovim", name = "rose-pine" },
   { "rebelot/kanagawa.nvim", name = "kanagawa" },
-  { "EdenEast/nightfox.nvim", name = "nightfox" },
+  {
+    "EdenEast/nightfox.nvim",
+    name = "nightfox",
+    config = function()
+      require("nightfox").setup({ options = {
+        transparent = true,
+      } })
+    end,
+  },
   { "aliqyan-21/darkvoid.nvim", name = "darkvoid" },
   {
     "LazyVim/LazyVim",

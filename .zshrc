@@ -88,7 +88,7 @@ plugins=(
   poetry
   poetry-env
   zsh-autosuggestions
-  zsh-syntax-highlighting 
+  # zsh-syntax-highlighting 
   fast-syntax-highlighting 
   zsh-autocomplete
 )
