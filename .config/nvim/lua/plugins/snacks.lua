@@ -8,6 +8,15 @@ return {
     picker = {
       hidden = true,
       ignored = true,
+      sources = {
+        explorer = {
+          formatters = {
+            file = {
+              git_status_hl = false,
+            },
+          },
+        },
+      },
 
       win = {
         list = {
@@ -47,7 +56,7 @@ return {
                   if i then
                     if i < 7 then
                       local result = results[i]
-                      vim.fn.setreg('"', result)
+                      vim.fn.setreg("+", result)
                       vim.notify("Copied: " .. result)
                     else
                       vim.cmd({ cmd = "cd", args = { results[1] } })
@@ -67,28 +76,37 @@ return {
     },
     dashboard = {
       preset = {
+        keys = {
+          { icon = "", key = "m", desc = "Open Manual", action = ":help user-manual" },
+          { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
+          { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+          { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
+          { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
+          {
+            icon = " ",
+            key = "c",
+            desc = "Config",
+            action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
+          },
+          { icon = " ", key = "s", desc = "Restore Session", section = "session" },
+          { icon = "", key = "l", desc = "LeetCode", action = ":Leet" },
+          { icon = "󰒲 ", key = "L", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
+          { icon = " ", key = "q", desc = "Quit", action = ":qa" },
+        },
         pick = function(cmd, opts)
           return LazyVim.pick(cmd, opts)()
         end,
         header = [[
-
- █████╗ ██████╗ ██╗  ██╗ █████╗ ██╗  ██╗ ██████╗ ██████╗ 
-██╔══██╗██╔══██╗██║ ██╔╝██╔══██╗██║ ██╔╝██╔═══██╗██╔══██╗
-███████║██████╔╝█████╔╝ ╚█████╔╝█████╔╝ ██║   ██║██████╔╝
-██╔══██║██╔══██╗██╔═██╗ ██╔══██╗██╔═██╗ ██║   ██║██╔══██╗
-██║  ██║██║  ██║██║  ██╗╚█████╔╝██║  ██╗╚██████╔╝██║  ██║
-╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚════╝ ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝
-
                                                                                                 .::!!!!!!!:.
                                                                 .!!!!!:.                        .:!!!!!!!!!!!!
-                                                                ~~~~!!!!!!.                 .:!!!!!!!!!UWWW$$$ 
-                                                                    :$$NWX!!:           .:!!!!!!XUWW$$$$$$$$$P 
-                                                                    $$$$$##WX!:      .<!!!!UW$$$$"  $$$$$$$$# 
-                                                                    $$$$$  $$$UX   :!!UW$$$$$$$$$   4$$$$$* 
-                                                                  ^$$$B  $$$$\     $$$$$$$$$$$$   d$$R" 
-                                                                "*$bd$$$$      '*$$$$$$$$$$$o+#" 
-                                                                """"          """"""" 
-]],
+                                                                ~~~~!!!!!!.                 .:!!!!!!!!!UWWW$$$
+                                                                    :$$NWX!!:           .:!!!!!!XUWW$$$$$$$$$P
+                                                                    $$$$$##WX!:      .<!!!!UW$$$$"  $$$$$$$$#
+                                                                    $$$$$  $$$UX   :!!UW$$$$$$$$$   4$$$$$*
+                                                                  ^$$$B  $$$$\     $$$$$$$$$$$$   d$$R"
+                                                                "*$bd$$$$      '*$$$$$$$$$$$o+#"
+                                                                """"          """""""
+   ]],
       },
     },
   },
