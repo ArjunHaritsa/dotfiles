@@ -19,6 +19,7 @@
 !/.gitignore
 !/.p10k.zsh
 !/.zsh_plugins.txt
+!/.wezterm.lua
 
 # docs
 !/README.md
