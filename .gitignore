@@ -18,6 +18,7 @@
 !/.zshrc
 !/.gitignore
 !/.p10k.zsh
+!/.zsh_plugins.txt
 
 # docs
 !/README.md
