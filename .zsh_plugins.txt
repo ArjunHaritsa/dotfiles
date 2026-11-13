@@ -1,0 +1,23 @@
+# Theme
+romkatv/powerlevel10k
+
+# Git: Interactive FZF-powered git utility (diffs, log, add, checkout)
+wfxr/forgit
+
+# Git: Clean standalone aliases (gst, gco, gp, gl, etc.)
+peterhurford/git-aliases.zsh
+
+# Comprehensive completions (including Git, Poetry, and CLI tools)
+zsh-users/zsh-completions kind:fpath
+
+# FZF Tab completion (must be loaded before syntax-highlighting/autosuggestions)
+Aloxaf/fzf-tab
+
+# Inline autosuggestions (ghost text as you type from history)
+zsh-users/zsh-autosuggestions
+
+# Auto-activate Python virtual environments (Poetry, pipenv, venv) on cd
+MichaelAquilina/zsh-autoswitch-virtualenv
+
+# Fast syntax highlighting (managed via Antidote)
+michel-kraemer/zsh-patina
