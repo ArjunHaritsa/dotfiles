@@ -1,9 +1,15 @@
+# # ==============================================================================
+# # Powerlevel10k Instant Prompt (Must stay at the top)
+# # ==============================================================================
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
+
 # ==============================================================================
-# Powerlevel10k Instant Prompt (Must stay at the top)
+# Theme
 # ==============================================================================
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+export STARSHIP_CONFIG="~/.config/starship/starship.toml"
+eval "$(starship init zsh)"
 
 # ==============================================================================
 # General Environment Settings
@@ -94,50 +100,23 @@ if command -v fzf &>/dev/null; then
   source <(fzf --zsh)
 fi
 
-### MODIFIED BY ARK8KOR BEGIN ###
- 
-# Kerberos token check in right aligned ZSH prompt
-__krb_status() {
-  if ! klist -s ; then
-    print -n "(No Kerberos token -> run kinit)"
-  fi
-}
-prompt_krb() {
-  RPROMPT="%{%k%b%F{red}%}$(__krb_status)%f"
-}
-autoload -Uz add-zsh-hook
-add-zsh-hook precmd prompt_krb
-
 # ==============================================================================
 # Runtime & Version Managers (pyenv, nvm)
 # ==============================================================================
-# Pyenv setup
-export PYENV_ROOT="$HOME/.pyenv"
-if [[ -d "$PYENV_ROOT/bin" ]]; then
-  export PATH="$PYENV_ROOT/bin:$PATH"
-fi
-if command -v pyenv &>/dev/null; then
-  eval "$(pyenv init - zsh)"
-  eval "$(pyenv virtualenv-init -)"
-fi
-
-# NVM setup
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 # export environment variables
-export PATH="$PATH:/home/ark8kor/.local/bin"
-export PATH="$PATH:/home/ark8kor/Softwares/Editors/nvim-linux-x86_64/bin"
-export PATH="$PATH:/home/ark8kor/Softwares/hugo-v0.150"
-export PATH="$PATH:/opt/Compilers/arc-gcc/arc_gnu_2022.09_prebuilt_elf32_le_linux_install/bin"
-export PATH="$PATH:/opt/Compilers/arm-gcc/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/bin"
-export PATH="$PATH:/home/ark8kor/Workspace/Projects/BST-BSTS-Core/bst_ai_integration/src/bst_ai_integration/tools/COINES/0.5.1/PC/bin/x86/"
+export PATH="$PATH:$HOME/.local/bin"
 
-### MODIFIED BY ARK8KOR END ###
+# ==============================================================================
+# Other redirections
+# ==============================================================================
+eval "$(zoxide init zsh --cmd cd)"
 
 # ==============================================================================
 # Aliases
 # ==============================================================================
-alias ls="eza --icons=always"
+alias ls="eza --icons=always --tree -L=2 --git"
+alias ll="ls -al"
+alias .="cd .."
+alias ..="cd -"
 alias nv="nvim ."

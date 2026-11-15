@@ -1,0 +1,102 @@
+# ==============================================================================
+# 1. Cross-Platform CLI Binaries
+# ==============================================================================
+[tools]
+"github:michel-kraemer/zsh-patina" = "latest"
+"github:ajeetdsouza/zoxide"        = "latest"
+
+starship    = "latest"
+neovim      = "latest"
+fd          = "latest"
+ripgrep     = "latest"
+fzf         = "latest"
+tree-sitter = "latest"
+yazi        = "latest"
+eza         = "latest"
+lazygit     = "latest"
+tmux        = "latest"
+
+# ==============================================================================
+# 2. Declarative Lists
+# =================================0=============================================
+[vars]
+brew_packages   = "wget curl zsh git"
+brew_casks      = "wezterm"
+apt_packages    = "wget curl zsh git"
+port_packages   = "wget curl zsh git"
+winget_packages = "GnuWin32.Wget cURL.cURL Git.Git wez.wezterm"
+
+# Format: "destination_path | repo_url" (Add new plugins on new lines here)
+git_repos = """
+{{env.HOME}}/.antidote | https://github.com/mattmc3/antidote.git
+"""
+
+# ==============================================================================
+# 3. Tasks
+# ==============================================================================
+[tasks.bootstrap]
+description = "Install OS-level packages"
+run = '''
+#!/usr/bin/env bash
+set -e
+
+case "$(uname -s)" in
+  Darwin)
+    if command -v brew >/dev/null 2>&1; then
+      brew install {{vars.brew_packages}}
+      brew install --cask {{vars.brew_casks}}
+    elif command -v port >/dev/null 2>&1; then
+      sudo port -N install {{vars.port_packages}}
+    fi
+    ;;
+  Linux)
+    sudo apt-get update && sudo apt-get install -y {{vars.apt_packages}}
+    ;;
+  MINGW*|CYGWIN*|Windows_NT)
+    for id in {{vars.winget_packages}}; do
+      winget install -e --id "$id" --silent
+    done
+    ;;
+esac
+'''
+
+[tasks.plugins]
+description = "Clone or update Git-based tools/plugins"
+run = '''
+#!/usr/bin/env bash
+set -e
+
+while IFS='|' read -r dest url; do
+  dest="$(echo "$dest" | xargs)"
+  url="$(echo "$url" | xargs)"
+  
+  [ -z "$dest" ] || [[ "$dest" =~ ^# ]] && continue
+
+  if [ -d "$dest/.git" ]; then
+    echo "Updating $dest..."
+    git -C "$dest" pull --ff-only
+  else
+    echo "Cloning $url -> $dest..."
+    mkdir -p "$(dirname "$dest")"
+    git clone --depth=1 "$url" "$dest"
+  fi
+done << 'EOF'
+{{vars.git_repos}}
+EOF
+'''
+
+[tasks.setup]
+description = "Run full environment setup (OS packages, git plugins, and mise tools)"
+depends = ["bootstrap", "plugins"]
+run = "mise install"
+
+# ==============================================================================
+# 4. dotfiles
+# ==============================================================================
+[dotfiles]
+"~" = {
+  source = ".",
+  mode = "symlink-each",
+  manifest = "git",
+  exclude = ["mise.toml", "README.md"]
+}
