@@ -4,11 +4,15 @@
 # if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
 #   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 # fi
+export PATH="$HOME/.local/bin:$PATH"
+
+if command -v mise >/dev/null 2>&1; then
+  eval "$(mise activate zsh)"
+fi
 
 # ==============================================================================
 # Theme
 # ==============================================================================
-export STARSHIP_CONFIG="~/.config/starship/starship.toml"
 eval "$(starship init zsh)"
 
 # ==============================================================================
@@ -61,9 +65,6 @@ if [[ -f "$ANTIDOTE_DIR/antidote.zsh" ]]; then
   source "$zsh_plugins"
 fi
 
-# Load Powerlevel10k configuration
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
 # ==============================================================================
 # fzf-tab & Completion Styling
 # ==============================================================================
@@ -103,9 +104,6 @@ fi
 # ==============================================================================
 # Runtime & Version Managers (pyenv, nvm)
 # ==============================================================================
-
-# export environment variables
-export PATH="$PATH:$HOME/.local/bin"
 
 # ==============================================================================
 # Other redirections

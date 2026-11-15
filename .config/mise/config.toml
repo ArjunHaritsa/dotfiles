@@ -36,6 +36,7 @@ git_repos = """
 # ==============================================================================
 [tasks.bootstrap]
 description = "Install OS-level packages"
+interactive = true
 run = '''
 #!/usr/bin/env bash
 set -e
@@ -94,9 +95,16 @@ run = "mise install"
 # 4. dotfiles
 # ==============================================================================
 [dotfiles]
-"~" = {
-  source = ".",
-  mode = "symlink-each",
-  manifest = "git",
-  exclude = ["mise.toml", "README.md"]
-}
+
+# Individual home files
+"~/.zshrc" = "../../.zshrc"
+"~/.zsh_plugins.txt" = "../../.zsh_plugins.txt"
+"~/.wezterm.lua" = "../../.wezterm.lua"
+"~/.config/starship.toml" = "../starship.toml"
+
+# Entire configuration directories
+"~/.config/nvim/lua" = "../nvim/lua"
+"~/.config/tmux" = "../tmux"
+
+# Mise manages its own configuration
+"~/.config/mise/config.toml" = "config.toml"
