@@ -22,8 +22,22 @@ local bg, err = random_file(backgrounds, "*.jpg")
 
 if err then
 	wezterm.log_error(err)
+	config.background = {}
+	config.window_background_opacity = 0.75
 else
 	wezterm.log_info("Using background image: " .. bg)
+	config.background = {
+		{
+			source = {
+				File = bg,
+			},
+			hsb = {
+				hue = 1.0, -- 1.0 = unchanged
+				saturation = 1, -- <1 desaturates
+				brightness = 0.01, -- Lower to keep text readable
+			},
+		},
+	}
 end
 
 config.font = wezterm.font_with_fallback({
@@ -40,19 +54,6 @@ config.font_size = 16
 config.line_height = 1.05
 
 config.enable_tab_bar = false
-
-config.background = {
-	{
-		source = {
-			File = bg,
-		},
-		hsb = {
-			hue = 1.0, -- 1.0 = unchanged
-			saturation = 1, -- <1 desaturates
-			brightness = 0.01, -- Lower to keep text readable
-		},
-	},
-}
 
 config.color_scheme = "Catppuccin Mocha"
 

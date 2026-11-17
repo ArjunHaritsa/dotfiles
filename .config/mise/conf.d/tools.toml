@@ -1,0 +1,19 @@
+
+# ==============================================================================
+# CLI Tools
+# ==============================================================================
+
+[tools]
+"github:michel-kraemer/zsh-patina" = "latest"
+"github:ajeetdsouza/zoxide" = "latest"
+
+starship    = "latest"
+neovim      = "latest"
+fd          = "latest"
+ripgrep     = "latest"
+fzf         = "latest"
+tree-sitter = "latest"
+yazi        = "latest"
+eza         = "latest"
+lazygit     = "latest"
+tmux        = "latest"

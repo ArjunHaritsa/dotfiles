@@ -1,0 +1,23 @@
+# ==============================================================================
+# Optional: macOS System Packages via MacPorts
+# ==============================================================================
+
+[tasks.bootstrap-macports]
+description = "Install system packages via MacPorts"
+run = """
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ "$(uname -s)" != "Darwin" ]]; then
+    echo "MacPorts is only available on macOS."
+    exit 1
+fi
+
+if ! command -v port >/dev/null 2>&1; then
+    echo "MacPorts is not installed."
+    exit 1
+fi
+
+sudo port selfupdate
+sudo port -N install wget curl zsh git btop tmux ripgrep
+"""

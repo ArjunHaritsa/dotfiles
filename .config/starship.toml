@@ -14,6 +14,9 @@ disabled = false
 
 [os.symbols]
 Macos=" "
+Windows="󰖳 "
+Ubuntu="󰕈 "
+Linux=" "
 
 [time]
 disabled = false

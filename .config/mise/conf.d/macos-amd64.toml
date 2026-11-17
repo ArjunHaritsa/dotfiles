@@ -1,0 +1,13 @@
+# ==============================================================================
+# System Packages
+# ==============================================================================
+
+[bootstrap.packages]
+
+# macOS — Homebrew
+"brew:wget" = "latest"
+"brew:curl" = "latest"
+"brew:zsh" = "latest"
+"brew:git" = "latest"
+"brew:btop" = "latest"
+"brew-cask:wezterm" = "latest"

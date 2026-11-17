@@ -1,0 +1,15 @@
+# ==============================================================================
+# Git Repositories
+# ==============================================================================
+
+[bootstrap.repos]
+
+"~/.antidote" = {
+    url = "https://github.com/mattmc3/antidote.git",
+    depth = 1
+}
+
+"~/.config/nvim" = {
+    url = "https://github.com/LazyVim/starter",
+    depth = 1
+}

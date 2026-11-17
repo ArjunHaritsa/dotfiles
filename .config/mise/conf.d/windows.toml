@@ -1,0 +1,11 @@
+# ==============================================================================
+# System Packages
+# ==============================================================================
+
+[bootstrap.packages]
+
+# Windows — WinGet
+"winget:GnuWin32.Wget" = "latest"
+"winget:cURL.cURL" = "latest"
+"winget:Git.Git" = "latest"
+"winget:wez.wezterm" = "latest"

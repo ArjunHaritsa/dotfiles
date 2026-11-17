@@ -1,0 +1,12 @@
+# ==============================================================================
+# System Packages
+# ==============================================================================
+
+[bootstrap.packages]
+
+# Linux — APT
+"apt:wget" = "latest"
+"apt:curl" = "latest"
+"apt:zsh" = "latest"
+"apt:git" = "latest"
+"apt:btop" = "latest"
