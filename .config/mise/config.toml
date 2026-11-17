@@ -16,9 +16,3 @@
 # Configuration directories
 "~/.config/nvim/lua" = "../nvim/lua"
 "~/.config/tmux" = "../tmux"
-
-# Mise configuration
-"~/.config/mise/config.toml" = "config.toml"
-"~/.config/mise/miserc.toml" = "miserc.toml"
-"~/.config/mise/conf.d" = "conf.d"
-

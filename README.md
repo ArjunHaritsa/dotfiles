@@ -30,7 +30,7 @@ export PATH="$HOME/.local/bin:$PATH"
 The below command clones the repository to `~/dotfiles` and trusts `mise` configurations under `~/.dotfiles/.config/mise`
 
 ```sh
-mise bootstrap --from https://github.com/you/dotfiles.git --from-dir ~/.dotfiles --config-dir .config/mise
+mise bootstrap --from 'https://github.com/ArjunHaritsa/dotfiles.git?ref=mise-config' --from-dir ~/.dotfiles --config-dir .config/mise
 ```
 
 > [!NOTE]
