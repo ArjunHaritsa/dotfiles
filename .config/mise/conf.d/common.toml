@@ -13,3 +13,8 @@
     url = "https://github.com/LazyVim/starter",
     depth = 1
 }
+
+"~/.tmux/plugins/tpm" = {
+  url = "https://github.com/tmux-plugins/tpm",
+  depth = 1
+}
