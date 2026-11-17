@@ -12,8 +12,8 @@ Make sure you have the following dependencies installed:
 
 # Install [`mise`](https://mise.jdx.dev)
 
-`mise` is a all in one version and tools management software that can also manage bootstrapping and dotfiles management.
-The dotfiles on this repo are synced and managed by `mise`.
+`mise` is a all in one version and tools management software that can also manage bootstrapping and dotfiles.
+The dotfiles on this repo are synced and configured by `mise` across various devices.
 
 - Install `mise` via curl
 ```sh
